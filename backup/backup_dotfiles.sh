@@ -15,7 +15,7 @@ mkdir -p "$DEST"
 
 echo " Backing up dotfiles to: $DEST"
 
-# Build include rules (order matters: include first, then exclude everything else)
+# Build include rules (include dirs *and* their contents), then exclude everything else
 INCLUDES=(
   "--include=.zshrc"
   "--include=.zsh_history"
@@ -43,7 +43,6 @@ INCLUDES=(
 cd "$HOME"
 
 # -a  : archive (recursive, perms, times, etc.)
-# -R  : same as --relative (preserve leading paths)
 # We pass INCLUDES array to ensure full recursion for selected paths only.
 rsync -avh --info=stats1,progress2 --prune-empty-dirs --mkpath --protect-args \
   "${INCLUDES[@]}" ./ "$DEST"
