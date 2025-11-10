@@ -20,11 +20,10 @@ echo " Backing up dotfiles to: $DEST"
 rsync -avh --relative --info=stats1,progress2 --prune-empty-dirs --mkpath --protect-args \
   --exclude ".oh-my-zsh/cache/**" \
   --exclude ".oh-my-zsh/log/**" \
-  --files-from=- "$HOME"/ "$DEST" <<'FILES'
+  --files-from=- "$HOME"/ "$DEST" <<'FILES'      
 .zshrc
 .zsh_history
 .p10k.zsh
-.oh-my-zsh/          
 
 .gitconfig
 
@@ -39,8 +38,9 @@ rsync -avh --relative --info=stats1,progress2 --prune-empty-dirs --mkpath --prot
 .config/yay/
 .config/gtk-3.0/
 .config/gtk-4.0/
+.oh-my-zsh/
+.ssh/
 
-.ssh/                
 FILES
 
 echo " Done. Backup snapshot created at: $DEST"
