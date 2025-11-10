@@ -15,11 +15,10 @@ mkdir -p "$DEST"
 
 echo " Backing up dotfiles to: $DEST"
 
+# -a = recursive, preserves perms/mtime/links
 # We use --relative so rsync preserves the leading paths exactly as listed.
 # We also include only what you want; nothing from caches, etc.
 rsync -avh --relative --info=stats1,progress2 --prune-empty-dirs --mkpath --protect-args \
-  --exclude ".oh-my-zsh/cache/**" \
-  --exclude ".oh-my-zsh/log/**" \
   --files-from=- "$HOME"/ "$DEST" <<'FILES'      
 .zshrc
 .zsh_history
@@ -41,7 +40,6 @@ rsync -avh --relative --info=stats1,progress2 --prune-empty-dirs --mkpath --prot
 .config/gtk-4.0/
 .oh-my-zsh/
 .ssh/
-
 FILES
 
 echo " Done. Backup snapshot created at: $DEST"
