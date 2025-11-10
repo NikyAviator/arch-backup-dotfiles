@@ -9,11 +9,11 @@ DEST="$DEST_ROOT/$HOSTNAME-$STAMP"
 
 # --- sanity checks ---
 if [ ! -d "$USB_MOUNT" ]; then
-  echo "✗ USB not mounted at $USB_MOUNT"; exit 1
+  echo " USB not mounted at $USB_MOUNT"; exit 1
 fi
 mkdir -p "$DEST"
 
-echo "→ Backing up dotfiles to: $DEST"
+echo " Backing up dotfiles to: $DEST"
 
 # We use --relative so rsync preserves the leading paths exactly as listed.
 # We also include only what you want; nothing from caches, etc.
@@ -43,5 +43,5 @@ rsync -avh --relative --info=stats1,progress2 --prune-empty-dirs --mkpath --prot
 .ssh/**                # USB-only copy; keep this folder private
 FILES
 
-echo "✓ Done. Backup snapshot created at: $DEST"
-echo "  (Next time you'll get another timestamped snapshot in $DEST_ROOT)"
+echo " Done. Backup snapshot created at: $DEST"
+echo " (Next time you'll get another timestamped snapshot in $DEST_ROOT)"
