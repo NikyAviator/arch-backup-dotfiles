@@ -40,7 +40,7 @@ rsync -avh --relative --info=stats1,progress2 --prune-empty-dirs --mkpath --prot
 .config/gtk-3.0/
 .config/gtk-4.0/
 
-.ssh/**                
+.ssh/                
 FILES
 
 echo " Done. Backup snapshot created at: $DEST"
