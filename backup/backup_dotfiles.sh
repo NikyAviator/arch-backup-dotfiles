@@ -24,7 +24,7 @@ rsync -avh --relative --info=stats1,progress2 --prune-empty-dirs --mkpath --prot
 .zshrc
 .zsh_history
 .p10k.zsh
-.oh-my-zsh/**          # you said "all"; we exclude cache/log above
+.oh-my-zsh/**          
 
 .gitconfig
 
@@ -40,7 +40,7 @@ rsync -avh --relative --info=stats1,progress2 --prune-empty-dirs --mkpath --prot
 .config/gtk-3.0/**
 .config/gtk-4.0/**
 
-.ssh/**                # USB-only copy; keep this folder private
+.ssh/**                
 FILES
 
 echo " Done. Backup snapshot created at: $DEST"
