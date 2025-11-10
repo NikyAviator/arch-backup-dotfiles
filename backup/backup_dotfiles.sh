@@ -33,6 +33,7 @@ rsync -avh --relative --info=stats1,progress2 --prune-empty-dirs --mkpath --prot
 .config/plasma-org.kde.plasma.desktop-appletsrc
 .config/konsolerc
 .config/konsolesshconfig
+.config/kwinoutputconfig.json
 
 .config/htop/
 .config/yay/
