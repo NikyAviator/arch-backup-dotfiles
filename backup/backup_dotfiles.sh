@@ -15,32 +15,35 @@ mkdir -p "$DEST"
 
 echo " Backing up dotfiles to: $DEST"
 
-# -a = recursive, preserves perms/mtime/links
-# We use --relative so rsync preserves the leading paths exactly as listed.
-# We also include only what you want; nothing from caches, etc.
-rsync -avh --relative --info=stats1,progress2 --prune-empty-dirs --mkpath --protect-args \
-  --files-from=- "$HOME"/ "$DEST" <<'FILES'      
-.zshrc
-.zsh_history
-.p10k.zsh
+# Build include rules (order matters: include first, then exclude everything else)
+INCLUDES=(
+  "--include=.zshrc"
+  "--include=.zsh_history"
+  "--include=.p10k.zsh"
+  "--include=.gitconfig"
 
-.gitconfig
+  "--include=.config/kdeglobals"
+  "--include=.config/kwinrc"
+  "--include=.config/kglobalshortcutsrc"
+  "--include=.config/plasma-org.kde.plasma.desktop-appletsrc"
+  "--include=.config/konsolerc"
+  "--include=.config/konsolesshconfig"
+  "--include=.config/kwinoutputconfig.json"
 
-.config/kdeglobals
-.config/kwinrc
-.config/kglobalshortcutsrc
-.config/plasma-org.kde.plasma.desktop-appletsrc
-.config/konsolerc
-.config/konsolesshconfig
-.config/kwinoutputconfig.json
+  "--include=.config/htop/***"
+  "--include=.config/yay/***"
+  "--include=.config/gtk-3.0/***"
+  "--include=.config/gtk-4.0/***"
+  "--include=.oh-my-zsh/***"                    
+  "--include=.ssh/***"                           
+  "--exclude=*"
+)
 
-.config/htop/
-.config/yay/
-.config/gtk-3.0/
-.config/gtk-4.0/
-.oh-my-zsh/
-.ssh/
-FILES
+# -a  : archive (recursive, perms, times, etc.)
+# -R  : same as --relative (preserve leading paths)
+# We pass INCLUDES array to ensure full recursion for selected paths only.
+rsync -aRvh --info=stats1,progress2 --prune-empty-dirs --mkpath --protect-args \
+  "${INCLUDES[@]}" "$HOME"/ "$DEST"
 
 echo " Done. Backup snapshot created at: $DEST"
 echo " (Next time you'll get another timestamped snapshot in $DEST_ROOT)"
