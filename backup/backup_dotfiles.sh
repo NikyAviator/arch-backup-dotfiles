@@ -39,11 +39,14 @@ INCLUDES=(
   "--exclude=*"
 )
 
+# Run rsync *from* $HOME so patterns match cleanly
+cd "$HOME"
+
 # -a  : archive (recursive, perms, times, etc.)
 # -R  : same as --relative (preserve leading paths)
 # We pass INCLUDES array to ensure full recursion for selected paths only.
-rsync -aRvh --info=stats1,progress2 --prune-empty-dirs --mkpath --protect-args \
-  "${INCLUDES[@]}" "$HOME"/ "$DEST"
+rsync -avh --info=stats1,progress2 --prune-empty-dirs --mkpath --protect-args \
+  "${INCLUDES[@]}" ./ "$DEST"
 
 echo " Done. Backup snapshot created at: $DEST"
 echo " (Next time you'll get another timestamped snapshot in $DEST_ROOT)"
