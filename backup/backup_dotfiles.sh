@@ -24,7 +24,7 @@ rsync -avh --relative --info=stats1,progress2 --prune-empty-dirs --mkpath --prot
 .zshrc
 .zsh_history
 .p10k.zsh
-.oh-my-zsh/**          
+.oh-my-zsh/          
 
 .gitconfig
 
@@ -35,10 +35,10 @@ rsync -avh --relative --info=stats1,progress2 --prune-empty-dirs --mkpath --prot
 .config/konsolerc
 .config/konsolesshconfig
 
-.config/htop/**
-.config/yay/**
-.config/gtk-3.0/**
-.config/gtk-4.0/**
+.config/htop/
+.config/yay/
+.config/gtk-3.0/
+.config/gtk-4.0/
 
 .ssh/**                
 FILES
